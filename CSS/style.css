@@ -1,0 +1,92 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary_color: rgba(37, 32, 32, 0.863);
+}
+
+body{
+    background-color: black;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.icon{
+    height: 23px;
+    width: 23px;
+    cursor: pointer;
+}
+.spotify_logo{
+    transform: scale(1.4);
+}
+
+.navbar{
+    width: 100%;
+    justify-content:space-between;
+}
+
+
+.home_and_explore{
+    gap: 10px;
+}
+.home{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+}
+.explore{
+    gap: 10px;
+    width: 22em;
+    cursor: pointer;
+}
+.explore:hover{
+    filter: brightness(1.3);
+}
+.searchBar{
+    width: 80%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+.searchBar::placeholder{
+    color: rgb(184, 175, 175);
+    font-weight: bold;
+}
+
+
+.login_area{
+    gap: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.signup_button{
+    padding: 10px 15px 10px 15px;
+    color: rgb(151, 149, 149);
+}
+.login_button{
+    background-color: white;
+    color: black;
+    padding: 10px 20px 10px 20px;
+    border-radius: 18px;
+}
+.login_button:hover{
+    transform: scale(1.03);
+}
+.signup_button:hover{
+    transform: scale(1.03);
+    color: white;
+}
+
+
+
+
+
