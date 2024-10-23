@@ -202,6 +202,135 @@ a{
     bottom: 10px;
 }
 
+/* .suggestions{
+    height: 10px;
+} */
+.heading{
+    justify-content: space-between;
+    font-weight: bold;
+}
+.heading > *{
+    cursor: pointer;
+}
+.heading > *:hover{
+    text-decoration: underline;
+}
+
+.component{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 20%;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.component img{
+    align-self: center;
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    box-shadow: 7px 5px 20px 1px #000000b5;
+}
+.component:hover{
+    background: linear-gradient(to bottom, rgba(12, 51, 49, 0.863), rgba(12, 51, 49, 0.363));
+}
+.artist_name{
+    font-size: 12px;
+    font-weight: bold;
+    margin: 15px 0px 0px 0px;
+}
+.artist{
+    font-size: 12px;
+    color: gray;
+    margin: 3px 0px 10px 0px;
+}
+.play_button {
+    position: absolute;
+    right: 25px;
+    bottom: 36%;
+    display: none;
+    z-index: 10;
+}
+.component:hover .play_button {
+    opacity: 1;
+    transform: translateY(0);
+    display: flex;
+    transition: transform 2s ease 2.5s;
+}
+.play_button img{
+    border-radius: 50%;
+    padding: 8px;
+    background-color: rgb(62, 182, 62);
+    height: 35px;
+    width: 35px;
+}
+.play_button img:hover{
+    background-color: rgb(97, 209, 97);
+}
+
+.artist_section img{
+    border-radius: 50%;
+}
+
+.main_footer{
+    font-size: 13px;
+    gap: 10px;
+    margin: 40px 0px 50px 8px;
+}
+.main_footer > *{
+    width: 20%;
+}
+.social_link{
+    display: flex;
+    flex-direction: column;
+}
+.social_link > *{
+    margin: 5px 0px 5px 0px;
+}
+.social_link > *:not(:first-child){
+    color: rgb(161, 149, 149);
+    cursor: pointer;
+}
+.social_link > *:not(:first-child):hover{
+    color: white;
+    text-decoration: underline;
+}
+.social_icon > *:hover{
+    filter: brightness(1.5);
+}
+.main_footer img{
+    width: 17px;
+    height: 17px;
+}
+.main_footer > * :first-child{
+    font-weight: bold;
+}
+.social_icon > *{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: fit-content;
+    background-color: rgba(54, 53, 53, 0.616);
+    border-radius: 50%;
+}
+.social_icon{
+    gap: 10px;
+}
+.dividing_line{
+    margin: auto;
+    width: 100%;
+    border: none;
+    height: 0.5px;
+    background-color: rgba(126, 116, 116, 0.651);
+}
+
+.copyright{
+    font-size: 14px;
+    margin: 50px 0px 50px 10px;
+}
 
 
 
