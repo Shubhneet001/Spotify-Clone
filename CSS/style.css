@@ -14,6 +14,7 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+
 a{
     text-decoration: none;
     color: white;
@@ -102,6 +103,8 @@ a{
     height: calc(100vh - 63px);
 }
 .left{
+    display: flex;
+    align-items: center;
     position: fixed;
     top: 63px;
     width: 25%;
@@ -197,8 +200,13 @@ a{
     height: 15px;
     width: 15px;
 }
+.podcast{
+    /* position: relative; */
+    margin-bottom: 50px;
+}
 .footer{
-    position: absolute;
+    margin-top: 30px;
+    position: relative;
     bottom: 10px;
 }
 
@@ -333,4 +341,73 @@ a{
 }
 
 
+
+@media screen and (max-width: 800px){
+
+
+    .left{
+        width: 40%;
+        display: none;
+    }
+
+    .navbar{
+        width: 100%;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+    .spotify_logo{
+        margin-left: 10px;
+    }
+    .login_area{
+        margin-left: auto;
+        /* justify-self: flex-end; */
+    }
+    .explore{
+        width: fit-content;
+    }
+    .explore > *:not(:first-child){
+        display: none;
+    }
+
+    .container{
+        padding: 5px;
+    }
+    .right{
+        margin-left: 5px;
+        width: 100%;    
+        overflow-x: hidden;
+    }
+    .component{
+        width: 200px;
+    }
+    .suggestions{
+        /* width: 300vw; */
+        overflow-x: scroll;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+        scrollbar-width: 0px;
+    }
+    .suggestions::-webkit-scrollbar{
+        display: none;
+    }
+
+    .social_icon{
+        align-self: flex-end;
+        justify-self: flex-start;
+    }
+
+    .main_footer{
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 0px;
+    }
+    .social_link{
+        padding: 0px;
+        margin: 0px;
+        width: 25%;
+    }
+
+
+
+}
 
