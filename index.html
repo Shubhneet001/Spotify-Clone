@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="CSS\style.css">
     <link rel="stylesheet" href="CSS\utility.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
 
 </head>
 <body>
@@ -28,12 +29,12 @@
 
         <div class="login_area flex align_center">
             <a href="" class="signup_button">Sign Up</a>
-            <a href="" class="login_button">Log In</a>
+            <a href="" class="login_button">Log In</a>  
         </div>
     </div>
 
     <div class="container flex center">
-        <div class="left bg_dark_gray">
+        <div class="left">
            <div class="library flex align_center">
                 <div class="your_library flex align_center">
                     <img src="images/your_library.svg" alt="your library" class="libray_button icon invert">
@@ -45,17 +46,8 @@
            </div>
 
 
-           <div class="playlist p3 bg_gray r1">
-                <p class="f2 m1">Create your first playlist</p>
-                <p class="f2 m1">It's easy we'll help you</p>
-                <button class="left_button create_playlist_button p1 r2 f2">Create playlist</button>
-           </div>
-
-
-           <div class="podcast p3 bg_gray r1">
-                <p class="f2 m1">Let's find some podcasts to follow</p>
-                <p class="f2 m1">We'll keep you updated on new episodes</p>
-                <button class="left_button browse_podcast_button p1 r2 f2">Browse podcast</button>
+           <div class="library_items scroller">
+                <ul></ul>
            </div>
 
 
@@ -77,7 +69,7 @@
         </div>
 
 
-        <div class="right">
+        <div class="right scroller">
             <div class="section artist_section">
                 <div class="heading flex align_center">
                     <h3>Popular artists</h3>
@@ -85,7 +77,65 @@
                 </div>
 
 
-                <div class="suggestions popular_artist flex align_center">
+                <div id="artists" class="suggestions popular_artist flex align_center">
+                    <div class="component">
+                        <img src="images/arijit_singh.jpeg" alt="Arijit Singh" class="arijit_singh">
+                        <div class="play_button">
+                            <img src="images/play_button.svg" alt="play">
+                        </div>
+                        <p class="artist_name">Arijit Singh</p>
+                        <p class="artist">Artist</p>
+                    </div>
+                    
+                    <div class="component">
+                        <img src="images/seedhe_maut.jpeg" alt="Seedhe Maut" class="seedhe_maut">
+                        <div class="play_button">
+                            <img src="images/play_button.svg" alt="play">
+                        </div>
+                        <p class="artist_name">Sedhe Maut</p>
+                        <p class="artist">Artist</p>
+                    </div>
+                    
+                    <div class="component">
+                        <img src="images/krsna.jpeg" alt="krsna" class="krsna">
+                        <div class="play_button">
+                            <img src="images/play_button.svg" alt="play">
+                        </div>
+                        <p class="artist_name">KR$NA</p>
+                        <p class="artist">Artist</p>
+                    </div>
+                    
+                    <div class="component">
+                        <img src="https://i.scdn.co/image/ab67616100005174437b9e2a82505b3d93ff1022" alt="Kendrick Lamar" class="kendrick_lamar">
+                        <div class="play_button">
+                            <img src="images/play_button.svg" alt="play">
+                        </div>
+                        <p class="artist_name">Kendrick Lamar</p>
+                        <p class="artist">Artist</p>
+                    </div>
+                    
+                    <div class="component">
+                        <img src="images/weekend.jpeg" alt="Weekend" class="weekend">
+                        <div class="play_button">
+                            <img src="images/play_button.svg" alt="play">
+                        </div>
+                        <p class="artist_name">The Weekend</p>
+                        <p class="artist">Artist</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="section">
+                <div class="heading flex align_center">
+                    <h3>Popular artists</h3>
+                    <p class="f2">Show all</p>
+                </div>
+
+
+                <div class="suggestions not_artist flex align_center">
                     <div class="component">
                         <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
                         <div class="play_button">
@@ -143,7 +193,7 @@
                 </div>
 
 
-                <div class="suggestions popular_artist flex align_center">
+                <div class="suggestions not_artist flex align_center">
                     <div class="component">
                         <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
                         <div class="play_button">
@@ -201,7 +251,7 @@
                 </div>
 
 
-                <div class="suggestions popular_artist flex align_center">
+                <div class="suggestions not_artist flex align_center">
                     <div class="component">
                         <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
                         <div class="play_button">
@@ -259,7 +309,7 @@
                 </div>
 
 
-                <div class="suggestions popular_artist flex align_center">
+                <div class="suggestions not_artist flex align_center">
                     <div class="component">
                         <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
                         <div class="play_button">
@@ -308,62 +358,32 @@
             </div>
 
 
-
-
-            <div class="section">
-                <div class="heading flex align_center">
-                    <h3>Popular artists</h3>
-                    <p class="f2">Show all</p>
-                </div>
-
-
-                <div class="suggestions popular_artist flex align_center">
-                    <div class="component">
-                        <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
-                        <div class="play_button">
-                            <img src="images/play_button.svg" alt="play">
-                        </div>
-                        <p class="artist_name">Arijit Singh</p>
-                        <p class="artist">Artist</p>
+            <div class="playbar flex center">
+                <div class="upper flex">
+                    <div class="playing_song flex center p1 r2"></div>
+                    <div class="player_controls flex center">
+                        <img id="previous" class="invert" src="images/prev_song.svg" alt="Previous">
+                        <img id="play" class="invert" src="images/play_button.svg" alt="Play">
+                        <img id="next" class="invert" src="images/next_song.svg" alt="next_song">
                     </div>
-                    
-                    <div class="component">
-                        <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
-                        <div class="play_button">
-                            <img src="images/play_button.svg" alt="play">
+                    <div class="vol flex center">
+                        <img class="invert" src="images/volume.svg" alt="volume">
+                        <div class="volume_bar flex">
+                            <div class="vol_dragger"></div>
                         </div>
-                        <p class="artist_name">Arijit Singh</p>
-                        <p class="artist">Artist</p>
-                    </div>
-                    
-                    <div class="component">
-                        <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
-                        <div class="play_button">
-                            <img src="images/play_button.svg" alt="play">
-                        </div>
-                        <p class="artist_name">Arijit Singh</p>
-                        <p class="artist">Artist</p>
-                    </div>
-                    
-                    <div class="component">
-                        <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
-                        <div class="play_button">
-                            <img src="images/play_button.svg" alt="play">
-                        </div>
-                        <p class="artist_name">Arijit Singh</p>
-                        <p class="artist">Artist</p>
-                    </div>
-                    
-                    <div class="component">
-                        <img aria-hidden="false" draggable="false" loading="eager" src="https://i.scdn.co/image/ab676161000051745ba2d75eb08a2d672f9b69b7" data-testid="artist-entity-image" alt="" class="mMx2LUixlnN_Fu45JpFB Yn2Ei5QZn19gria6LjZj">
-                        <div class="play_button">
-                            <img src="images/play_button.svg" alt="play">
-                        </div>
-                        <p class="artist_name">Arijit Singh</p>
-                        <p class="artist">Artist</p>
                     </div>
                 </div>
+                <div class="seek flex center">
+                    <div id="cur__song_time flex center f1">00:00</div>
+                    <div class="seek_bar flex">
+                        <div class="seek_dragger"></div>
+                    </div>
+                    <div id="cur__song_length flex center f2">00:00</div>
+                </div>
+
             </div>
+
+
 
 
             <div class="main_footer flex">
@@ -410,7 +430,12 @@
         </div>
     </div>
     
-
+    <!-- <p class="m2">Create a playlist</p>
+    <p class="m2">Log in to create and share playlists</p>
+    <div class="buttons_in_dialogue_box flex">
+        <buton class="dialogue_box_button">Not now</buton>
+        <buton class="dialogue_box_button">Log In</buton>
+    </div> -->
     
 
         
