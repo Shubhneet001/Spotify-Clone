@@ -401,35 +401,44 @@ a {
     position: fixed;
     flex-direction: column;
     z-index: 1000000;
-    height: 70px;
-    width: 100%;
-    background-color: black;
+    height: 80px;
+    width: 70%;
+    bottom: 20px;
+    background: linear-gradient(to right, rgb(27, 27, 27), black);
+    border-radius: 10px;
+    box-shadow: 4px 4px 20px 1px #000000b5;
 }
 .playbar img{
     cursor: pointer;
+    transition: all ease 0.4s;
+    height: 50%;
 }
 .playbar img:hover{
     transform: scale(1.1);
 }
 
 .upper{
-    height: 95%;
+    height: 65%;
     width: 100%;
-    justify-content: space-between;
 }
 .playing_song{
-    width: 20%;
+    padding: 10px;
+    font-size: 18px;
+    width: 40%;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .player_controls{
     gap: 10px;
-    width: 60%;
-}
-.player_controls img{
-    height: 30px;
+    width: 10%;
 }
 
 .vol{
+    height: 65%;
+    position: absolute;
+    right: 0px;
     width: 20%;
     gap: 10px;
 }
@@ -439,14 +448,16 @@ a {
 }
 .volume_bar{
     width: 60%;
-    background-color: gray;
+    background-color: rgb(64, 163, 64);
     height: 5px;
     border-radius: 5px;
     align-items: center;
+    cursor: pointer;
+
 }
 .vol_dragger{
     position: relative;
-    left: 0px;
+    left: 100%;
     width: 13px;
     height: 13px;
     background-color: white;
@@ -455,16 +466,23 @@ a {
 }
 
 .seek{
+    height: 35%;
     width: 100%;
-    padding: 5px;
-    gap: 10px;
+    padding: 10px;
+    gap: 5px;
+}
+
+#cur_song_time, #cur_song_length{
+    width: 8%;
+    text-align: center;
 }
 .seek_bar{
     align-items: center;
-    width: 90%;
+    width: 84%;
     background-color: gray;
     height: 5px;
     border-radius: 5px;
+    cursor: pointer;
 }
 .seek_dragger{
     position: relative;
@@ -572,73 +590,6 @@ a {
 }
 
 
-.dialogue_box {
-    color: black;
-    font-size: 12px;
-    position: absolute;
-    /* Ensure the triangle is positioned relative to the box */
-    width: 300px;
-    /* Width of the dialogue box */
-    padding: 10px;
-    /* Padding inside the box */
-    background-color: #6491e4;
-    /* Background color of the box */
-    border-radius: 10px;
-    /* Rounded corners for rectangle */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    /* Optional shadow for depth */
-    z-index: 1000;
-}
-
-.dialogue_box::before {
-    content: "";
-    /* No content, just a triangle shape */
-    position: absolute;
-    /* Position the triangle absolutely */
-    z-index: 1000;
-    left: -20px;
-    /* Move the triangle to the left of the box */
-    top: 50%;
-    /* Center vertically */
-    transform: translateY(-50%);
-    /* Adjust to exactly center */
-    width: 0;
-    /* Triangle has no width */
-    height: 0;
-    /* Triangle has no height */
-    border-top: 10px solid transparent;
-    /* Top side of the triangle */
-    border-bottom: 10px solid transparent;
-    /* Bottom side of the triangle */
-    border-right: 20px solid #6491e4;
-    /* Right side becomes the triangle pointing to the box */
-}
-
-.dialogue_box p:first-child {
-    font-weight: 700;
-}
-
-.buttons_in_dialogue_box {
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.dialogue_box_button {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: white;
-
-    font-weight: bold;
-}
-
-.buttons_in_dialogue_box :first-child {
-    background: transparent;
-}
-
-
-
-
 
 
 
@@ -649,19 +600,37 @@ a {
 
 
     .left {
-        width: 60%;
-        display: none;
+
+        width: 100%;
         top: 0;
-        left: 0;
+        left: -100%;
         margin: 0;
         height: 100vh;
         z-index: 100;
-        background-color: rgb(0, 0, 0);
+        transition: all 5s;
+        background: linear-gradient(to bottom, rgb(29, 29, 29) 30%, rgb(15, 14, 14) 70%)
+        /* backdrop-filter: blur(25px); */
+        /* backdrop-filter: brightness(10%); */
+    }
+
+    .side_header{
+        padding: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .side_header img:first-child{
+        width: 30px;
+        height: 30px;
+    }
+    .side_header img:nth-child(2){
+        width: 20px;
+        height: 20px;
     }
 
     .footer {
         position: absolute;
-        bottom: 10px;
+        bottom: 0px;
+        padding: 10px;
     }
 
     .navbar {
@@ -711,6 +680,28 @@ a {
 
     .suggestions::-webkit-scrollbar {
         display: none;
+    }
+
+
+    .playbar{
+        width: 90%;
+    }
+    .player_controls{
+        width: 30%;
+    }
+    .vol{
+        width: 25%;
+    }
+    .playing_song{
+        width: 45%;
+        font-size: 16px;
+
+    }
+    .seek{
+        gap: 15px;
+    }
+    .seek_bar{
+        width: 70%;
     }
 
     .social_icon {

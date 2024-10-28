@@ -79,16 +79,43 @@ function handleClick(event) {
 // if(doc)
 let screenWidth = window.innerWidth;
 let hamburger = document.getElementsByClassName('spotify_logo')[0];
-// let body = document.querySelector(body);
+let body = document.querySelector("body");
+const sidebar_style = window.getComputedStyle(left_sidebar);
+const playbar = document.querySelector(".palybar");
 // console.log(screenWidth);
 
 if(screenWidth <= 800){
     hamburger.setAttribute("src", "images/hamburger.svg");
     hamburger.addEventListener('click', function(){
-        // body.style.filter = 'opacity(0.5)'
-        left_sidebar.style.display = 'flex';
+        left_sidebar.style.left = "0%";
+        left_sidebar.style.transition = "all 0.3s";
+        // playbar.style.zindex = "1000";
+        const sidebar_header = document.createElement('div');
+        sidebar_header.className = "side_header flex";
+        sidebar_header.innerHTML = `
+            <img class="invert" src="images/spotify_logo.svg" alt="spotify logo">
+            <img id="close" class="invert" src="images/cross.svg" alt="cross">
+        `
+        left_sidebar.prepend(sidebar_header);
+        const close_sidebar = document.getElementById("close")
+        close_sidebar.addEventListener('click', ()=>{
+            sidebar_header.remove();
+            left_sidebar.style.left = "-100%";
+        });
     })
+
+    function removeSidebar(){
+        if(sidebar_style.left == "0%"){
+            left_sidebar.style.left = "-100%";
+            document.removeEventListener('click', removeSidebar);
+        }
+    }
 }
+
+
+
+
+
 
 const randomColor = function(){
     const hex = "0123456789ABCDEF";
@@ -105,28 +132,73 @@ for(let i=0; i<5; i++){
 // console.log(artist_random_color);
 
 
-
 const artists = document.getElementById('artists');
 
-// right_sidebar.style.transition = "background ease-in-out 5s";
-artists.addEventListener('mouseover', function(event) {
-    if (artists.contains(event.target)) {
-        const clickedArtist = event.target.closest('#artists > *');
-        if (clickedArtist) {
-            const artists_array = Array.from(artists.children);
-            const artist_index = artists_array.indexOf(clickedArtist);            
-            right_sidebar.style.background = `linear-gradient(to bottom, ${artist_random_color[artist_index]}40 10%, #0C332F5C 70%)`;
-        }
-    }
+const addAlpha = (color, alpha) => {
+    return `${color}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;  
+};
+
+// Debounce function to limit rapid firing of mouseover events
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+// Function to handle the gradient update
+const updateGradient = (artistIndex) => {
+    if (artistIndex === -1) return;
+    
+    const baseColor = artist_random_color[artistIndex];
+    right_sidebar.style.background = `
+        linear-gradient(
+            to bottom,
+            ${addAlpha(baseColor, 0.25)} 10%,
+            ${addAlpha('#0C332F', 0.36)} 70%
+        )
+    `;
+};
+
+// Add the mouseover event listener with performance optimizations
+artists.addEventListener('mouseover', debounce((event) => {
+    // Early return if not hovering over the artists container
+    if (!artists.contains(event.target)) return;
+    
+    const clickedArtist = event.target.closest('#artists > *');
+    if (!clickedArtist) return;
+    
+    const artistIndex = Array.from(artists.children).indexOf(clickedArtist);
+    
+    // Apply the gradient change with a smooth transition
+    right_sidebar.style.transition = 'background 5s ease 2s';
+    updateGradient(artistIndex);
+}, 50)); // 50ms debounce delay
+
+// Optional: Reset gradient when mouse leaves the artists container
+artists.addEventListener('mouseleave', () => {
+    right_sidebar.style.background = `linear-gradient(
+        to bottom,
+        ${addAlpha('#0C332F', 0.36)} 70%
+    )`;
 });
 
-// playbar positioning
-const playbar = document.querySelector('.playbar');
-const right_style = window.getComputedStyle(right_sidebar);
 
-playbar.style.width = right_style.width;
-playbar.style.bottom = '5px';
-playbar.style.right = '5px';
+
+
+
+// playbar positioning
+// const playbar = document.querySelector('.playbar');
+// const right_style = window.getComputedStyle(right_sidebar);
+
+// playbar.style.width = right_style.width;
+// playbar.style.bottom = '5px';
+// playbar.style.right = '5px';
 
 
 // ******* SONGS
@@ -148,9 +220,11 @@ async function getSongs() {
 }
  
 let cur_song = new Audio();                  // current song
+let song_array;
+
 // play song
 const playMusic = (track)=>{
-    console.log(track);
+    // console.log(track);
     // let audio = new Audio("/Spotify clone/songs/" + track + ".mp3");
     cur_song.src = "/Spotify clone/songs/" + track + ".mp3";
     cur_song.play();
@@ -161,21 +235,34 @@ const playMusic = (track)=>{
     playbar_song_name.innerHTML = track;
 }
 
+const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+};
+
+function convertUrl(url){
+    const newUrl = url.split('/').pop().split('.').shift().replaceAll('%20', ' ');
+    return newUrl;
+}
+
 
 // get list of all the songs
 async function main() {
 
-    let song_array = await getSongs();
-    console.log(song_array);
+    song_array = await getSongs();
+    // console.log(song_array);
+
+
 
     // create list of songs in the library_items div
-    let songUl = document.querySelector(".library_items").getElementsByTagName("ul")[0];
+    songUl = document.querySelector(".library_items").getElementsByTagName("ul")[0];
     for(s of song_array){
-        const song_name = s.split('/').pop().split('.').shift().replaceAll('%20', ' ');
+        // const song_name = s.split('/').pop().split('.').shift().replaceAll('%20', ' ');
         songUl.innerHTML += `
             <li class="">
                 <div class="song_item">
-                    <p>${song_name}</p>
+                    <p>${convertUrl(s)}</p>
                     <p>artist</p>
                 </div>
                 <img class="library_play_button" src="images/play_button.svg" alt="Play the song">
@@ -190,16 +277,10 @@ async function main() {
         });
     })
 
-    // if(cur_song.played){
-    //     play.src = "images/pause_button.svg";
-    //     play.style.height = "20px"
-    // }else{
-    //     play.src = "images/pause_button.svg";
-    // }
 
-    if(play.src == "images/pause_button.svg") play.style.height = "20px";
+    // if(play.src == "images/pause_button.svg") play.style.height = "20px";
 
-    // add event listener to paly, prev, next buttons
+    // add event listener to play/pause buttons
     play.addEventListener("click", ()=>{
         if(cur_song.paused){
             cur_song.play();
@@ -208,6 +289,96 @@ async function main() {
             cur_song.pause();
             play.src = "images/play_button.svg";
         }
+    })
+
+
+    // adding event listener to volume bar
+    let cur_vol;
+    let vol_bar = document.querySelector(".volume_bar")
+    function volumeChanger(e){
+        let vol_percent = (e.offsetX/e.target.getBoundingClientRect().width)*100;
+        document.querySelector(".vol_dragger").style.left = vol_percent + "%";
+        cur_song.volume = vol_percent/100;
+        cur_vol = cur_song.volume;
+        vol_bar.style.background = `
+                                linear-gradient(
+                                to right,
+                                rgb(64, 163, 64) 0 ${cur_vol*100}%,
+                                white ${cur_vol*100}% 100%
+                                )
+        `
+    }
+    vol_bar.addEventListener('click', volumeChanger);
+
+    // add event listener to mute button
+    let mute = false;
+    mute_button.addEventListener('click', ()=>{
+        if(!mute){
+            cur_song.volume = 0;
+            mute_button.src = "images/mute.svg";
+            document.querySelector(".vol_dragger").style.left = "0%";
+            vol_bar.style.background = "gray";
+            vol_bar.removeEventListener('click', volumeChanger);
+            vol_bar.style.cursor = "default";
+            mute = true;
+        }else{
+            cur_song.volume = cur_vol;
+            mute_button.src = "images/volume.svg";
+            document.querySelector(".vol_dragger").style.left = cur_vol*100 + "%";
+            vol_bar.style.background = `
+                                linear-gradient(
+                                to right,
+                                rgb(64, 163, 64) 0 ${cur_vol*100}%,
+                                white ${cur_vol*100}% 100%
+                                )
+            `
+            vol_bar.addEventListener('click', volumeChanger);
+            vol_bar.style.cursor = "pointer";
+            mute = false;
+        }
+    })
+
+    
+
+    // listen for timeupdate function
+    cur_song.addEventListener("timeupdate", ()=>{
+        let cur_time = Math.floor(cur_song.currentTime);
+        let duration = Math.floor(cur_song.duration);
+        // console.log(`${cur_time} , ${duration}`);
+
+        cur_song_time.innerHTML = `${formatTime(cur_time)}`
+        cur_song_length.innerHTML = `${formatTime(duration)}`
+
+        document.querySelector('.seek_dragger').style.left = (cur_time/duration)*100 + "%";
+
+        document.querySelector(".seek_bar").style.background = `
+                                                            linear-gradient(
+                                                            to right,
+                                                            rgb(64, 163, 64) 0 ${(cur_time/duration)*100}%,
+                                                            white ${(cur_time/duration)*100}% 100%
+                                                            )
+        `
+    })
+
+    // add an event listener to seekbar
+    document.querySelector(".seek_bar").addEventListener('click', e=>{
+        let seekingTime = (e.offsetX/e.target.getBoundingClientRect().width)*100;
+        document.querySelector(".seek_dragger").style.left = seekingTime + "%";
+        cur_song.currentTime = (cur_song.duration * seekingTime)/100;
+    })
+
+    // add an event lisener to prv/next    
+    previous.addEventListener('click', ()=>{
+        let ind = song_array.indexOf(cur_song.src);
+        if(ind - 1 >= 0) playMusic(convertUrl(song_array[ind-1])) ;
+        else next.removeEventListener('click', this);
+    })
+    
+    
+    next.addEventListener('click', ()=>{
+        let ind = song_array.indexOf(cur_song.src);
+        if(ind + 1 < song_array.length) playMusic(convertUrl(song_array[ind+1])) ;
+        else next.removeEventListener('click', this);
     })
 
 
