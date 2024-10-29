@@ -219,7 +219,12 @@ a {
     color: rgb(136, 134, 134);
 }
 
-.library_items ul li img {
+.playing_song_icon{
+    height: 20px;
+    width: 20px;
+}
+
+.library_play_button {
     border-radius: 50%;
     padding: 8px;
     background-color: rgb(62, 182, 62);
@@ -231,13 +236,13 @@ a {
     transition: all 0.3s ease;
 }
 
-.library_items ul li:hover img {
+.library_items ul li:hover .library_play_button {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
 }
 
-.library_items ul li img:hover {
+.library_play_button:hover {
     background-color: rgb(97, 209, 97);
 }
 
@@ -460,6 +465,7 @@ a {
     left: 100%;
     width: 13px;
     height: 13px;
+    transition: left 0.2s;
     background-color: white;
     border-radius: 50%;
     cursor: pointer;
@@ -491,7 +497,7 @@ a {
     background-color: white;
     border-radius: 50%;
     left: 0%;
-    transition: left 0.5s;
+    transition: left 0.2s;
     cursor: pointer;
 }
 

@@ -221,6 +221,7 @@ async function getSongs() {
  
 let cur_song = new Audio();                  // current song
 let song_array;
+let songli;
 
 // play song
 const playMusic = (track)=>{
@@ -229,6 +230,20 @@ const playMusic = (track)=>{
     cur_song.src = "/Spotify clone/songs/" + track + ".mp3";
     cur_song.play();
     play.src = "images/pause_button.svg";
+
+    ind = song_array.indexOf(cur_song.src);
+    
+    songli.forEach((li)=>{
+        const limage = li.querySelector("img");
+        if(Array.from(songli).indexOf(li) == ind){
+            limage.src = "images/song_playing.svg";
+            limage.className = "playing_song_icon invert";
+        }else {
+            limage.src = "images/play_button.svg";
+            limage.className = "library_play_button";
+        }
+    })
+
 
     // update current song in the playbar
     let playbar_song_name = document.querySelector(".playing_song");
@@ -256,20 +271,27 @@ async function main() {
 
 
     // create list of songs in the library_items div
-    songUl = document.querySelector(".library_items").getElementsByTagName("ul")[0];
+    const songUl = document.querySelector(".library_items").getElementsByTagName("ul")[0];
+    
+    // More specific selector using the class
+    // const specificLi = document.querySelectorAll('.library_items ul li');
+    
+    
+    
+    
     for(s of song_array){
-        // const song_name = s.split('/').pop().split('.').shift().replaceAll('%20', ' ');
         songUl.innerHTML += `
             <li class="">
                 <div class="song_item">
                     <p>${convertUrl(s)}</p>
                     <p>artist</p>
-                </div>
-                <img class="library_play_button" src="images/play_button.svg" alt="Play the song">
-            </li>
+                    </div>
+                    <img class="library_play_button" src="images/play_button.svg" alt="Play the song">
+                    </li>
         `
     }
-
+    songli = document.querySelectorAll(".library_items ul li");
+                
     // add click event listener to play the song
     Array.from(document.querySelector(".library_items").getElementsByTagName("li")).forEach(e=>{
         e.addEventListener("click", ()=>{
@@ -331,7 +353,7 @@ async function main() {
                                 rgb(64, 163, 64) 0 ${cur_vol*100}%,
                                 white ${cur_vol*100}% 100%
                                 )
-            `
+            `   
             vol_bar.addEventListener('click', volumeChanger);
             vol_bar.style.cursor = "pointer";
             mute = false;
@@ -352,11 +374,11 @@ async function main() {
         document.querySelector('.seek_dragger').style.left = (cur_time/duration)*100 + "%";
 
         document.querySelector(".seek_bar").style.background = `
-                                                            linear-gradient(
-                                                            to right,
-                                                            rgb(64, 163, 64) 0 ${(cur_time/duration)*100}%,
-                                                            white ${(cur_time/duration)*100}% 100%
-                                                            )
+                                                        linear-gradient(
+                                                        to right,
+                                                        rgb(64, 163, 64) 0 ${(cur_time/duration)*100}%,
+                                                        white ${(cur_time/duration)*100}% 100%
+                                                        )
         `
     })
 
